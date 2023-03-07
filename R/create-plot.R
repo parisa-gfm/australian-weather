@@ -9,7 +9,7 @@ df = read_csv("data/weatherAUS.csv")
 # Create a scatter plot of Humidity9am and Temp9am
 # a location
 
-city = "Richmond"
+city = "Brisbane"
 
 scatter_plot = 
 df %>%
@@ -23,3 +23,11 @@ df %>%
 
 # Save the plot in graphics/
 ggsave(filename = "graphics/scatter-temp-humidity.png", plot = scatter_plot)
+
+bar_chart =
+  df %>%
+  group_by(Location) %>%
+  summarise(average_rainfall = mean(Rainfall, na.rm = TRUE)) %>%
+  ggplot(aes(y = Location, x = average_rainfall)) +
+  geom_col(fill="skyblue")
+ggsave(filename = "graphics/barchart-avg-rainfall.png", plot = bar_chart)
